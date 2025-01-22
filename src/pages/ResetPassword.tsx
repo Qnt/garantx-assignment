@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import { Mail, TimerReset as KeyReset, ArrowLeft } from 'lucide-react';
 import {
   Box,
@@ -138,9 +138,9 @@ function ForgotPassword() {
 
               <Box sx={{ textAlign: 'center', mt: 2 }}>
                 <Link
-                  component="button"
+                  component={RouterLink}
+                  to="/sign-in"
                   variant="body2"
-                  onClick={() => navigate('/sign-in')}
                   sx={{ display: 'inline-flex', alignItems: 'center', gap: 1 }}
                   underline="hover"
                 >

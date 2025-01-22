@@ -1,21 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Mail, Lock, LogIn } from 'lucide-react';
 import {
   Box,
-  Container,
-  Typography,
-  TextField,
   Button,
-  FormControlLabel,
   Checkbox,
+  Container,
+  FormControlLabel,
+  InputAdornment,
   Link,
   Paper,
-  InputAdornment,
+  TextField,
+  Typography,
 } from '@mui/material';
+import { Lock, LogIn, Mail } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { getEmailError, getPasswordError } from '../utils/validation';
-
 function SignIn() {
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -201,12 +200,9 @@ function SignIn() {
                 Don't have an account?{' '}
               </Typography>
               <Link
-                href="#"
+                component={RouterLink}
+                to="/sign-up"
                 variant="body2"
-                onClick={e => {
-                  e.preventDefault();
-                  navigate('/sign-up');
-                }}
                 underline="hover"
               >
                 Sign up

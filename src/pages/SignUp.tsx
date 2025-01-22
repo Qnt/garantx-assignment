@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { Lock, Mail, UserPlus } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import {
   getEmailError,
@@ -214,12 +214,9 @@ function SignUp() {
                 Already have an account?{' '}
               </Typography>
               <Link
-                href="#"
+                component={RouterLink}
+                to="/sign-in"
                 variant="body2"
-                onClick={e => {
-                  e.preventDefault();
-                  navigate('/sign-in');
-                }}
                 underline="hover"
               >
                 Sign in
