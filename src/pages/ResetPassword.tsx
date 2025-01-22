@@ -12,14 +12,35 @@ import {
   Link,
   Alert,
 } from '@mui/material';
+import { getEmailError } from '../utils/validation';
 
 function ForgotPassword() {
   const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const navigate = useNavigate();
 
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setEmail(value);
+    if (emailError) {
+      setEmailError(getEmailError(value));
+    }
+  };
+
+  const handleEmailBlur = () => {
+    setEmailError(getEmailError(email));
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const emailErr = getEmailError(email);
+    setEmailError(emailErr);
+
+    if (emailErr) {
+      return;
+    }
+
     setSubmitted(true);
     console.log('Password reset requested for:', email);
   };
@@ -93,7 +114,10 @@ function ForgotPassword() {
                 autoComplete="email"
                 autoFocus
                 value={email}
-                onChange={e => setEmail(e.target.value)}
+                onChange={handleEmailChange}
+                onBlur={handleEmailBlur}
+                error={!!emailError}
+                helperText={emailError}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
